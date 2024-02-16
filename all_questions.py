@@ -71,7 +71,6 @@ def question1():
     A.insert_right("No")
     B.insert_left("Yes")
     B.insert_right("No")
-    tree.print_tree()
 
     answer["tree"] = tree  # use the Tree structure
     # answer["training_error"] = training_error
@@ -111,7 +110,6 @@ def question2():
     tree.right.insert_right("A")
     tree.right.left.insert_left("C")
     tree.right.left.insert_right("B")
-    tree.print_tree()
     answer["(d) full decision tree"] = tree
 
     return answer
