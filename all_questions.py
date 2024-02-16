@@ -24,39 +24,39 @@ def question1():
     level2_right = {}
 
     level1["smoking"] = 1.0
-    level1["smoking_info_gain"] = 0.2780719051126377
+    level1["smoking_info_gain"] = 0.2780
 
-    level1["cough"] = -1.0
-    level1["cough_info_gain"] = -1.0
+    level1["cough"] = - 1.0
+    level1["cough_info_gain"] = 0.2364
 
-    level1["radon"] = -1.0
-    level1["radon_info_gain"] = -1.0
+    level1["radon"] = - 1.0
+    level1["radon_info_gain"] = 0.0348
 
-    level1["weight_loss"] = -1.0
-    level1["weight_loss_info_gain"] = -1.0
+    level1["weight_loss"] = - 1.0
+    level1["weight_loss_info_gain"] = 0.0290
 
-    level2_left["smoking"] = -1.0
-    level2_left["smoking_info_gain"] = -1.0
-    level2_right["smoking"] = -1.0
-    level2_right["smoking_info_gain"] = -1.0
+    level2_left["smoking"] = - 1.0
+    level2_left["smoking_info_gain"] = 0.0
+    level2_right["smoking"] = - 1.0
+    level2_right["smoking_info_gain"] = 0.0
 
-    level2_left["radon"] = -1.0
-    level2_left["radon_info_gain"] = 0.0
+    level2_left["radon"] = - 1.0
+    level2_left["radon_info_gain"] = 0.07290
 
-    level2_left["cough"] = 0.8812908992306927
-    level2_left["cough_info_gain"] = 0.7219280948873623
+    level2_left["cough"] = 1.0
+    level2_left["cough_info_gain"] = 0.72192
 
-    level2_left["weight_loss"] = -1.0
-    level2_left["weight_loss_info_gain"] = -1.0
+    level2_left["weight_loss"] = - 1.0
+    level2_left["weight_loss_info_gain"] = 0.1709
 
-    level2_right["radon"] = 0.7219280948873623
-    level2_right["radon_info_gain"] = 0.7219280948873623
+    level2_right["radon"] = 1.0
+    level2_right["radon_info_gain"] = 0.7219
 
-    level2_right["cough"] = -1.0
-    level2_right["cough_info_gain"] = -1.0
+    level2_right["cough"] = - 1.0
+    level2_right["cough_info_gain"] = 0.32192
 
-    level2_right["weight_loss"] = -1.0
-    level2_right["weight_loss_info_gain"] = -1.0
+    level2_right["weight_loss"] = - 1.0
+    level2_right["weight_loss_info_gain"] = 0.17095
 
     answer["level1"] = level1
     answer["level2_left"] = level2_left
@@ -86,12 +86,12 @@ def question2():
     answer = {}
 
     # Answers are floats
-    answer["(a) entropy_entire_data"] = 1.0
+    answer["(a) entropy_entire_data"] = 1.425364
 
     # Infogain
-    answer["(b) x < 0.2"] = 0.46438561897747244
-    answer["(b) x < 0.7"] = 0.3602012209808308
-    answer["(b) y < 0.6"] = 0.44217935649972373
+    answer["(b) x < 0.2"] = 0.17739
+    answer["(b) x < 0.7"] = 0.35570
+    answer["(b) y < 0.6"] = 0.34781
 
     # choose one of 'x=0.2', 'x=0.7', or 'x=0.6'
     answer["(c) attribute"] = "x = 0.7"
@@ -99,17 +99,20 @@ def question2():
     # Use the Binary Tree structure to construct the tree
     # Answer is an instance of BinaryTree
     tree = u.BinaryTree("y = 0.7")
-    tree.insert_left("x=0.7")
-    tree.left.insert_left("B")
-    tree.left.insert_right("y=0.3")
-    tree.left.right.insert_left("A")
-    tree.left.right.insert_right("C")
+    A = tree.insert_left("y <= 0.6")
+    A.insert_left("B")
+    C = A.insert_right("x <= 0.2")
+    D = C.insert_left("y <= 0.8")
+    C.insert_right("A")
+    D.insert_left("C")
+    D.insert_right("B")
 
-    tree.insert_right("x=0.2")
-    tree.right.insert_left("y=0.8")
-    tree.right.insert_right("A")
-    tree.right.left.insert_left("C")
-    tree.right.left.insert_right("B")
+    B = tree.insert_right("y <= 0.6")
+    E = B.insert_left("y <= 0.3")
+    B.insert_right("A")
+    E.insert_left("A")
+    E.insert_right("C")
+
     answer["(d) full decision tree"] = tree
 
     return answer
@@ -126,7 +129,7 @@ def question3():
 
     # float
     answer["(b) Gini, ID"] = 0.0
-    answer["(c) Gini, Gender"] = 0.5
+    answer["(c) Gini, Gender"] = 0.48
     answer["(d) Gini, Car type"] = 0.1625
     answer["(e) Gini, Shirt type"] = 0.4914
 
@@ -211,8 +214,8 @@ def question5():
     explain["a explain"] = "Because of its higher testing accuracy, Model 2 manages unseen data better. Given how much greater the training accuracy is than the testing accuracy, Model 1 appears to be overfitted."
 
     # string: one of 'Model 1' or 'Model 2'
-    explain["b"] = "Model 1"
-    explain["b explain"] = "Increased categorization accuracy as indicated by the equations"
+    explain["b"] = "Model 2"
+    explain["b explain"] = "Model 2 is still a better option because it generalizes well and is less prone to overfit, even though it is slightly less accurate. On Dataset B, however, Model 1's accuracy significantly decreased."
 
     explain["c similarity"] = "Both aim to prevent overfitting"
     explain["c similarity explain"] = "In order to avoid overfitting, both MDL and PEE take model complexity into account and discourage extremely complicated models."
@@ -235,22 +238,22 @@ def question6():
     answer["a, level 1"] = "x <= 0.5"
     answer["a, level 2, right"] = "A"
     answer["a, level 2, left"] = "y <= 0.4"
-    answer["a, level 3, left"] = "B"
-    answer["a, level 3, right"] = "A"
+    answer["a, level 3, left"] = "A"
+    answer["a, level 3, right"] = "B"
 
     # run each datum through the tree. Count the number of errors and divide by number of samples. .
     # Since we have areas: calculate the area that is misclassified (total area is unity)
     # float between 0 and 1
-    answer["b, expected error"] = 0.58
+    answer["b, expected error"] = 0.3
 
     # Use u.BinaryTree to define the tree. Create your tree.
     # Replace "root node" by the proper node of the form "z <= float"
     tree = u.BinaryTree("x <= 0.5")
 
-    A = tree.insert_right("A")
-    B = tree.insert_left("y <= 0.4")
-    B.insert_left("B")
-    B.insert_right("A")
+    A=tree.insert_left("y <= 0.4")
+    B=tree.insert_right("A")
+    A.insert_left("A")
+    A.insert_right("B")
 
     answer["c, tree"] = tree
 
@@ -266,7 +269,7 @@ def question7():
     answer["b, info gain, Handedness"] = 0.531
 
     # string: "ID" or "Handedness"
-    answer["c, which attrib"] = "Based on the information gain, ID be chosen as the splitting attribute because it is greater than Handedness."
+    answer["c, which attrib"] = "ID"
 
     # answer is a float
     answer["d, gain ratio, ID"] = 0.232
@@ -274,7 +277,7 @@ def question7():
 
     # string: one of 'ID' or 'Handedness' based on gain ratio
     # choose the attribute with the largest gain ratio
-    answer["f, which attrib"] = "Based on the gain ratio, Handedness be chosen as the splitting attribute because it is greater than ID."
+    answer["f, which attrib"] = "Handedness"
 
     return answer
 
