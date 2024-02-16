@@ -213,11 +213,11 @@ def question5():
     explain["a explain"] = "Because of its higher testing accuracy, Model 2 manages unseen data better. Given how much greater the training accuracy is than the testing accuracy, Model 1 appears to be overfitted."
 
     # string: one of 'Model 1' or 'Model 2'
-    explain["b"] = "Model 2"
-    explain["b explain"] = "The measures provided are just the averages of the two datasets' accuracies. Both the models have been trained on Dataset A, so they will always get them right, but Model 2 still has a higher accuracy when it comes to Dataset B, the real unseen data."
+    explain["b"] = "Model 1"
+    explain["b explain"] = "Increased categorization accuracy as indicated by the equations"
 
-    explain["c similarity"] = "Incorporation of Model Complexity"
-    explain["c similarity explain"] = "The goal of both pessimistic error estimate techniques and MDL is to penalize decision tree complexity. Assuming that simpler models generalize better to unseen data, they seek to strike a compromise between the tree's size or complexity and its ability to match the training data."
+    explain["c similarity"] = "Both aim to prevent overfitting"
+    explain["c similarity explain"] = "In order to avoid overfitting, both MDL and PEE take model complexity into account and discourage extremely complicated models."
 
     explain["c difference"] = "Approach to Model Complexity"
     explain["c difference explain"] = "The MDL Principle calls for a trade-off between the model's complexity—which is determined by how long the description must be in order to capture the model—and how well the model fits the data. On the other hand, the Pessimistic Error Estimate directly alters a decision tree's error estimate by including a penalty term that rises in complexity with the tree (for instance, the number of leaf nodes)."
@@ -235,10 +235,10 @@ def question6():
     #  and "float" is a floating point number (notice: <=)
     # The value could also be "A" or "B" if it is a leaf
     answer["a, level 1"] = "x <= 0.5"
-    answer["a, level 2, right"] ="A"
+    answer["a, level 2, right"] = "A"
     answer["a, level 2, left"] = "y <= 0.4"
-    answer["a, level 3, left"] = "A"
-    answer["a, level 3, right"] = "x <= 0.2"
+    answer["a, level 3, left"] = "B"
+    answer["a, level 3, right"] = "A"
 
     # run each datum through the tree. Count the number of errors and divide by number of samples. .
     # Since we have areas: calculate the area that is misclassified (total area is unity)
@@ -251,8 +251,8 @@ def question6():
 
     A = tree.insert_right("A")
     B = tree.insert_left("y <= 0.4")
-    B.insert_left("A")
-    B.insert_right("x <= 0.2")
+    B.insert_left("B")
+    B.insert_right("A")
 
     answer["c, tree"] = tree
 
@@ -264,19 +264,19 @@ def question7():
     answer = {}
 
     # float
-    answer["a, info gain, ID"] = 0.0
-    answer["b, info gain, Handedness"] = -1.474
+    answer["a, info gain, ID"] = 1.0
+    answer["b, info gain, Handedness"] = 0.531
 
     # string: "ID" or "Handedness"
-    answer["c, which attrib"] = "Based on the information gain, Handedness should not be chosen as the splitting attribute because it results in negative information gain. So we will choose the ID attribute"
+    answer["c, which attrib"] = "Based on the information gain, ID be chosen as the splitting attribute because it is greater than Handedness."
 
     # answer is a float
-    answer["d, gain ratio, ID"] = 0.0
-    answer["e, gain ratio, Handedness"] = -0.737
+    answer["d, gain ratio, ID"] = 0.232
+    answer["e, gain ratio, Handedness"] = 0.531
 
     # string: one of 'ID' or 'Handedness' based on gain ratio
     # choose the attribute with the largest gain ratio
-    answer["f, which attrib"] = "Based"
+    answer["f, which attrib"] = "Based on the gain ratio, Handedness be chosen as the splitting attribute because it is greater than ID."
 
     return answer
 
