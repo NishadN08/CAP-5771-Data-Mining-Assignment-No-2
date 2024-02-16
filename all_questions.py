@@ -90,9 +90,9 @@ def question2():
     answer["(a) entropy_entire_data"] = 1.0
 
     # Infogain
-    answer["(b) x <= 0.2"] = 0.46438561897747244
-    answer["(b) x <= 0.7"] = 0.3602012209808308
-    answer["(b) y <= 0.6"] = 0.44217935649972373
+    answer["(b) x < 0.2"] = 0.46438561897747244
+    answer["(b) x < 0.7"] = 0.3602012209808308
+    answer["(b) y < 0.6"] = 0.44217935649972373
 
     # choose one of 'x=0.2', 'x=0.7', or 'x=0.6'
     answer["(c) attribute"] = "x = 0.7"
@@ -271,7 +271,7 @@ def question7():
     answer["c, which attrib"] = "Based on the information gain, Handedness should not be chosen as the splitting attribute because it results in negative information gain. So we will choose the ID attribute"
 
     # answer is a float
-    answer["d, gain ratio, ID"] = 0
+    answer["d, gain ratio, ID"] = 0.0
     answer["e, gain ratio, Handedness"] = -0.737
 
     # string: one of 'ID' or 'Handedness' based on gain ratio
